@@ -2,35 +2,78 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function Laravel\Prompts\alert;
 
 class LoginController extends Controller
 {
     //
-    public function index()
+    public function user()
     {
-        return view('');
+        return view('login.user');
+    }
+    public function admin()
+    {
+        return view('login.admin');
     }
 
-    public function login(Request $request)
+    public function logout(Request $request)
     {
-        $dataLogin = $request->validate([
-            'nomor_identitas_unik' => 'required',
-            'tanggal_lahir' => 'required',
-            'role' => 'required'
-        ]);
-        if (Auth::attempt($dataLogin)) {
-            $request->session()->regenerate();
-            if (Auth::user()->nomor_identitas_unik && Auth::user()->role == 'Admin') {
-                return redirect()->route('admin')->with('success','Login Berhasil');
-            } elseif (Auth::user()->nomor_identitas_unik && Auth::user()->role != 'Admin') {
-                return redirect()->route('user')->with('success','Login Berhasil');
-            }else{
-                return redirect()->route('login')->with('error','Login Gagal');
+        $role = $request->role;
+        Auth::guard($role)->logout();
+    }
+
+    public function check(Request $request)
+    {
+        if ($request->role == 'admin') {
+            $dataLogin = $request->validate([
+                'email' => 'required',
+                'password' => 'required',
+            ]);
+            if (Auth::guard('admin')->attempt($dataLogin)) {
+                //jika login berhasil generate session dan redirect ke  halaman dashboard
+                $request->session()->regenerate();
+                if (Auth::guard('admin')->user()->email) {
+                    // return response(
+                    //     [
+                    //         'success' => true,
+                    //         'redirect_url' => '/admin/',
+                    //         'pesan' => 'Login Berhasil'
+                    //     ],
+                    //     200
+                    // );
+                    return redirect('/admin')->with('success', 'Login Berhasil');
+                } else {
+                    return back()->with('error', 'Login Gagal');
+                }
+            } else {
+                return back()->with('error', 'Email atau Password Salah');
             }
-        }else{
-            return redirect()->route('login')->with('error','Login Gagal');
+        }
+    }
+    public function verif(Request $request)
+    {
+        $request->validate([
+            'no_induk' => 'required',
+            'tanggal_lahir' => 'required',
+        ]);
+
+        $user = UserModel::where('no_induk', $request->no_induk)
+            ->where('tanggal_lahir', $request->tanggal_lahir)
+            ->first();
+        // dd($user);
+        // Auth::login($user); // Proses login tanpa return
+        // dd(Auth::check());
+
+
+        if ($user) {
+            Auth::login($user); // Proses login tanpa return
+            // dd(Auth::check());
+                return redirect()->intended('/user')->with('success', 'Login Berhasil');
+        } else {
+            return back()->with('error', 'Login Gagal: User tidak ditemukan');
         }
     }
 }
