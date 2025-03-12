@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('id_user',false,false)->unique();
             $table->integer('id_kandidat',false,false);
             $table->datetime('tanggal');
-            //$table->datetime('tanggal');
             $table->timestamps();
         });
     }
