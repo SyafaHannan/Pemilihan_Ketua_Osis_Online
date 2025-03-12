@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../../dist/css/adminlte.css"><!--end::Required Plugin(AdminLTE)-->
     <style>
         body {
-            background-image: url('{{asset("bg/perpus3.jpg")}}');
+            background-image: url('{{asset("img/bg.jpg")}}');
             background-size: cover;
             /* Agar gambar memenuhi seluruh background */
             height: 100vh;
@@ -55,7 +55,8 @@
     @endif
 
     <div class="login-box">
-        <div class="login-logo"> <a class="text-white" href=""><b>PERPUSTAKAAN</b></a> </div> <!-- /.login-logo -->
+        <div class="login-logo"><a class="text-black" href=""><b>PIKOS</b></a> <br> <h5>Aplikasi Pemilihan Ketua Osis</h5></div> <!-- /.login-logo -->
+
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>

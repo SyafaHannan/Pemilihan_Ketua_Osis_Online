@@ -52,6 +52,6 @@ Route::prefix('/admin')->middleware(['LoginAdmin'])->group(function () {
     Route::get('/akun',[AkunController::class,'user'])->name('akun.user');
 });
 
-Route::prefix('/user')->group(function () {
+Route::prefix('/user')->middleware(['LoginUser'])->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user');
 });

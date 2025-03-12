@@ -70,8 +70,12 @@ class LoginController extends Controller
 
         if ($user) {
             Auth::login($user); // Proses login tanpa return
-            // dd(Auth::check());
-                return redirect()->intended('/user')->with('success', 'Login Berhasil');
+            session()->regenerate();
+        if(Auth::user()->no_induk){
+            return redirect()->intended('/user')->with('success', 'Login Berhasil');
+        }else{
+            return back()->with('error', 'Login Gagal: User tidak ditemukan');
+        }
         } else {
             return back()->with('error', 'Login Gagal: User tidak ditemukan');
         }

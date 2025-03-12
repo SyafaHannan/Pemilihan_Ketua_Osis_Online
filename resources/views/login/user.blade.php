@@ -17,6 +17,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous"><!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="../../dist/css/adminlte.css"><!--end::Required Plugin(AdminLTE)-->
+    <style>
+        body {
+            background-image: url('{{asset("img/bg.jpg")}}');
+            background-size: cover;
+            /* Agar gambar memenuhi seluruh background */
+            height: 100vh;
+            /* Membuat halaman setinggi viewport */
+        }
+    </style>
+
 </head> <!--end::Head--> <!--begin::Body-->
 
 <body class="login-page">

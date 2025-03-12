@@ -46,7 +46,7 @@
     </div> <!--end::App Content Header--> <!--begin::App Content-->
     <div class="app-content">
         <div class="container-fluid">
-            <table class="table AkunTable table-hovered table-striped">
+            <table class="table AkunTable table-hovered table-striped w-100">
                 <thead>
                     <tr>
                         <td class="text-center">No</td>
@@ -75,31 +75,12 @@
                 </tbody>
             </table>
         </div>
-
-    </div>
-    <div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdroplabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-                </div>
-                <div class="modal-body">
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
 </main>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        $('#example').DataTable();
-    });
-</script>
-<script>
     $(document).ready(function() {
+        $('.AkunTable').DataTable();
         console.log(jQuery.fn.jquery);
         console.log(typeof $.fn.DataTable !== 'undefined' ? 'DataTables Loaded' : 'DataTables NOT Loaded');
         console.log(typeof $.fn.DataTable);

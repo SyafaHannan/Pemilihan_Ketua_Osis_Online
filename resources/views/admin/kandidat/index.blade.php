@@ -2,11 +2,6 @@
 @section('title','Admin | Dashboard')
 @section('content')
 
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<!-- DataTables CDN -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-
 <body>
     <div class="container mt-4">
         <h2>Data Calon</h2>
@@ -46,10 +41,6 @@
             </tbody>
         </table>
     </div>
-
-    <!-- jQuery & DataTables JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#kandidatTable').DataTable();
