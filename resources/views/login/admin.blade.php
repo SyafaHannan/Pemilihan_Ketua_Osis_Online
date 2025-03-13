@@ -77,7 +77,7 @@
             </div> <!--end::Row-->
             @csrf
             </form>
-            <a class="text-center mb-3 text-decoration-none" href="/login">--Login sebagai Pengguna--</a>
+            <a class="text-center mb-3 text-decoration-none" href="/login">Login sebagai Pengguna</a>
         </div>
     </div>
     </div> <!-- /.login-box --> <!--begin::Third Party Plugin(OverlayScrollbars)-->

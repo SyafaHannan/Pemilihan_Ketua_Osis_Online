@@ -28,14 +28,15 @@
     <div class="app-content-header"> <!--begin::Container-->
         <div class="container-fluid"> <!--begin::Row-->
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 d-flex">
                     <h3 class="mb-0">Data Akun </h3>
+                    <button id="toggleButton" class="btn btn-primary ms-2">Admin</button>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="/dashboard">Admin</a></li>
                         <li class="breadcrumb-item"><a href="/nidhacenter">Data Akun</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
+                        <li class="breadcrumb-item active" id="page-name" aria-current="page">
                             User
                         </li>
 
@@ -46,36 +47,64 @@
     </div> <!--end::App Content Header--> <!--begin::App Content-->
     <div class="app-content">
         <div class="container-fluid">
-            <table class="table AkunTable table-hovered table-striped w-100">
-                <thead>
-                    <tr>
-                        <td class="text-center">No</td>
-                        <td class="text-center">Nama</td>
-                        <td class="text-center">Kelas</td>
-                        <td class="text-center">Tanggal Lahir</td>
-                        <td class="text-center">Nomor Induk</td>
-                        <td class="text-center">Keterangan</td>
-                        <td class="text-center">Aksi</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($user as $data)
-                    <tr>
-                        <td class="text-center">{{$loop->iteration}}</td>
-                        <td class="text-center">{{$data->username}}</td>
-                        <td class="text-center">{{$data->kelas}}</td>
-                        <td class="text-center">{{$data->tanggal_lahir}}</td>
-                        <td class="text-center">{{$data->no_induk}}</td>
-                        <td class="text-center">{{$data->status}}</td>
-                        <td class="text-center">
-                            <a href="/nidhacenter/event/{{$data->id}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div id="content1">
+                <table class="table AkunTable table-hovered table-striped w-100">
+                    <thead>
+                        <tr>
+                            <td class="text-center">No</td>
+                            <td class="text-center">Nama</td>
+                            <td class="text-center">Kelas</td>
+                            <td class="text-center">Tanggal Lahir</td>
+                            <td class="text-center">Nomor Induk</td>
+                            <td class="text-center">Keterangan</td>
+                            <td class="text-center">Aksi</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($user as $data)
+                        <tr>
+                            <td class="text-center">{{$loop->iteration}}</td>
+                            <td class="text-center">{{$data->username}}</td>
+                            <td class="text-center">{{$data->kelas}}</td>
+                            <td class="text-center">{{$data->tanggal_lahir}}</td>
+                            <td class="text-center">{{$data->no_induk}}</td>
+                            <td class="text-center">{{$data->status}}</td>
+                            <td class="text-center">
+                                <a href="/nidhacenter/event/{{$data->id}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div id="content2" class="d-none">
+                <table class="table AkunTable table-hovered table-striped w-100">
+                    <thead>
+                        <tr>
+                            <td class="text-center">No</td>
+                            <td class="text-center">Username</td>
+                            <td class="text-center">Email</td>
+                            <td class="text-center">Aksi</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($admin as $data)
+                        <tr>
+                            <td class="text-center">{{$loop->iteration}}</td>
+                            <td class="text-center">{{$data->username}}</td>
+                            <td class="text-center">{{$data->email}}</td>
+                            <td class="text-center">
+                                <a href="/nidhacenter/event/{{$data->id}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
 
 </main>
 <script>
@@ -87,5 +116,27 @@
 
     });
 </script>
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function() {
+        let content1 = document.getElementById('content1');
+        let content2 = document.getElementById('content2');
+        let button = document.getElementById('toggleButton');
+        let page = document.getElementById('page-name');
+
+        if (content1.classList.contains('d-none')) {
+            content1.classList.remove('d-none');
+            content2.classList.add('d-none');
+            button.textContent = "Admin";
+            page.textContent = "User";
+        } else {
+            content1.classList.add('d-none');
+            content2.classList.remove('d-none');
+            button.textContent = "User";
+            page.textContent = "Admin";
+
+        }
+    });
+</script>
+
 
 @endsection
