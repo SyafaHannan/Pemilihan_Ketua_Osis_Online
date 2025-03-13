@@ -52,7 +52,7 @@
             </div> <!--end::Container-->
         </nav> <!--end::Header--> <!--begin::Sidebar-->
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
-            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index.html" class="brand-link"> <!--begin::Brand Image--> <img src="../../../img/logo_pikos.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">AdminLTE 4</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
+            <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="../index.html" class="brand-link"> <!--begin::Brand Image--> <img src="../../../img/logo_pikos.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span class="brand-text fw-light">PIKOS</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
             <div class="sidebar-wrapper">
                 <nav class="mt-2"> <!--begin::Sidebar Menu-->
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
@@ -81,9 +81,11 @@
                             </a>
                         </li>
                         <div class="nav sidebar-menu sidebar-bottom flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+                            @if(Auth::guard('admin')->user()->role === 'Super Admin')
                             <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-person-fill-add"></i>
                                     <p class="text">Tambah Akun Admin</p>
                                 </a> </li>
+                            @endif
                             <li class="nav-item"> <a href="/auth" class="nav-link"> <i class="nav-icon bi bi-person-square"></i>
                                     <p>Login Ke Akun Lain</p>
                                 </a> </li>
@@ -120,6 +122,21 @@
             @endif
 
             @yield('content')
+            <div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdroplabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </main> <!--end::App Main--> <!--begin::Footer-->
         <footer class="app-footer"> <!--begin::To the end-->
             <div class="float-end d-none d-sm-inline">PIKOS</div> <!--end::To the end--> <!--begin::Copyright--> <strong>
@@ -133,6 +150,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.3/axios.min.js" integrity="sha512-zJXKBryKlsiDaWcWQ9fuvy50SG03/Qc5SqfLXxHmk9XiUUbcD9lXYjHDBxLFOuZSU6ULXaJ69bd7blSMEgxXNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../../dist/js/adminlte.js"></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
+        $('.ModalTrigger').on('click', function(a) {
+            a.preventDefault();
+            let title = $(this).data('title');
+            $('#modalForm .modal-title').text(title);
+            const modalForm = document.getElementById('modalForm');
+            modalForm.addEventListener('shown.bs.modal', function(eventTambah) {
+                eventTambah.preventDefault();
+                eventTambah.stopImmediatePropagation();
+                const link = event.relatedTarget.getAttribute('attr-href');
+                const modalData = document.querySelector('#modalForm .modal-body');
+                axios.get(link).then(response => {
+                    $('#modalForm .modal-body').html(response.data);
+                });
+            });
+        });
+
+        function changeHTML(element, find, text) {
+            $(element).find(find).html();
+            return $(element).find(find).html(text).promise().done();
+        }
+
+
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
         const Default = {
             scrollbarTheme: "os-theme-light",

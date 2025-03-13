@@ -31,7 +31,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
  * HALAMAN KANDIDAT
  * /admin/kandidat
  */
-Route::prefix('/admin')->middleware(['LoginAdmin'])->group(function () {
+Route::prefix('/admin')->middleware(['LoginAdmin:Admin,Super Admin'])->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin'); //Dashboard
 
     /**
@@ -50,6 +50,12 @@ Route::prefix('/admin')->middleware(['LoginAdmin'])->group(function () {
      * Include CRUD data dari model UserModel
      */
     Route::get('/akun',[AkunController::class,'user'])->name('akun.user');
+    Route::get('/form',[AkunController::class,'formUser'])->name('form.user');
+    Route::get('/modif/{id}',[AkunController::class,'modifUser'])->name('modif.user');
+    Route::post('/user/tambah',[AkunController::class,'tambahUser'])->name('tambah.user');
+    Route::post('/user/edit/{id}',[AkunController::class,'editUser'])->name('edit.user');
+    Route::post('/user/hapus/{id}',[AkunController::class,'hapus'])->name('hapus.user');
+
 });
 
 Route::prefix('/user')->middleware(['LoginUser'])->group(function () {

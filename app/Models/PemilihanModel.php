@@ -14,12 +14,15 @@ class PemilihanModel extends Model
     protected $fillable = [
         'id_user',
         'id_kandidat',
-        'tanggal'
+        'id_forum'
     ];
     public function user():BelongsTo{
         return $this->belongsTo(UserModel::class,'id_user','id_user');
     }
     public function kandidat():BelongsTo{
         return $this->belongsTo(KandidatModel::class,'id_kandidat','id_kandidat');
+    }
+    public function forum():BelongsTo{
+        return $this->belongsTo(ForumModel::class,'id_forum','id_forum');
     }
 }

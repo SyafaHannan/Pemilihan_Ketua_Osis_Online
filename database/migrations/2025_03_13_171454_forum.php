@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         //
-        Schema::create('pemilihan',function(Blueprint $table){
-            $table->integer('id_pemilihan',true,false);
-            $table->integer('id_forum',false,false);
-            $table->integer('id_user',false,false)->unique();
-            $table->integer('id_kandidat',false,false);
-            $table->datetime('tanggal');
+        Schema::create('forum',function(Blueprint $table){
+            $table->integer('id_forum',true,false);
+            $table->string('judul',100)->nullable(false);
+            $table->string('akses')->nullable(false);
+            $table->date('tanggal_mulai')->nullable(false);
+            $table->date('tanggal_akhir')->nullable(false);
             $table->timestamps();
         });
     }

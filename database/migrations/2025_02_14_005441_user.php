@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('no_induk',60)->unique()->nullable(false);
             $table->string('kelas', 60);
             $table->date('tanggal_lahir')->nullable(false);
-            $table->string('status')->nullable(false);
+            $table->string('status')->default('Belum Memilih');
             $table->timestamps();
         });
     }

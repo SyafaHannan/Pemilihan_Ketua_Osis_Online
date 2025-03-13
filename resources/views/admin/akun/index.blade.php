@@ -30,7 +30,9 @@
             <div class="row">
                 <div class="col-sm-6 d-flex">
                     <h3 class="mb-0">Data Akun </h3>
-                    <button id="toggleButton" class="btn btn-primary ms-2">Admin</button>
+                    <button id="toggleButton" class="btn btn-primary ms-2 bi bi-arrow-repeat"> Admin</button>
+                    <btn class="btn btn-success  ModalTrigger ms-2" id="addButton" data-title="Tambah Akun User" data-bs-target='#modalForm' data-bs-toggle="modal" attr-href="{{url('/admin/form')}}"><i class='bi bi-plus-circle'></i> Tambah Akun</btn>
+
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
@@ -70,7 +72,11 @@
                             <td class="text-center">{{$data->no_induk}}</td>
                             <td class="text-center">{{$data->status}}</td>
                             <td class="text-center">
-                                <a href="/nidhacenter/event/{{$data->id}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                                <btn class="btn btn-primary  ModalTrigger" data-title="Edit Akun User" data-bs-target='#modalForm' data-bs-toggle="modal" attr-href="{{url('/admin/modif',$data->id_user)}}"><i class='bi bi-pencil-square'></i></btn>
+                                <form action="{{url('/admin/user/hapus',$data->id_user)}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data {{$data->username}} ?')"><i class='bi bi-trash'></i></button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -84,7 +90,10 @@
                             <td class="text-center">No</td>
                             <td class="text-center">Username</td>
                             <td class="text-center">Email</td>
+                            <td class="text-center">Role</td>
+                            @if(Auth::guard('admin')->user()->role == 'Super Admin')
                             <td class="text-center">Aksi</td>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -93,10 +102,13 @@
                             <td class="text-center">{{$loop->iteration}}</td>
                             <td class="text-center">{{$data->username}}</td>
                             <td class="text-center">{{$data->email}}</td>
+                            <td class="text-center">{{$data->role}}</td>
+                            @if(Auth::guard('admin')->user()->role == 'Super Admin')
                             <td class="text-center">
                                 <a href="/nidhacenter/event/{{$data->id}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
 
                             </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>
@@ -121,17 +133,20 @@
         let content1 = document.getElementById('content1');
         let content2 = document.getElementById('content2');
         let button = document.getElementById('toggleButton');
+        let addButton = document.getElementById('addButton');
         let page = document.getElementById('page-name');
 
         if (content1.classList.contains('d-none')) {
             content1.classList.remove('d-none');
+            addButton.classList.remove('d-none');
             content2.classList.add('d-none');
-            button.textContent = "Admin";
+            button.textContent = " Admin";
             page.textContent = "User";
         } else {
             content1.classList.add('d-none');
+            addButton.classList.add('d-none');
             content2.classList.remove('d-none');
-            button.textContent = "User";
+            button.textContent = " User";
             page.textContent = "Admin";
 
         }
