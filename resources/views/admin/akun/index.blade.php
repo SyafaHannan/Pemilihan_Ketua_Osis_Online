@@ -50,7 +50,7 @@
     <div class="app-content">
         <div class="container-fluid">
             <div id="content1">
-                <table class="table AkunTable table-hovered table-striped w-100">
+                <table class="table AkunTable table-bordered table-hovered table-striped w-100">
                     <thead>
                         <tr>
                             <td class="text-center">No</td>
@@ -84,10 +84,10 @@
                 </table>
             </div>
             <div id="content2" class="d-none">
-                <table class="table AkunTable table-hovered table-striped w-100">
+                <table class="table AkunTable table-bordered table-hovered table-striped w-100">
                     <thead>
                         <tr>
-                            <td class="text-center">No</td>
+                            <td class="text-center col-md-4">No</td>
                             <td class="text-center">Username</td>
                             <td class="text-center">Email</td>
                             <td class="text-center">Role</td>
@@ -105,7 +105,7 @@
                             <td class="text-center">{{$data->role}}</td>
                             @if(Auth::guard('admin')->user()->role == 'Super Admin')
                             <td class="text-center">
-                                <btn class="btn btn-primary  ModalTrigger" data-title="Edit Akun Admin" data-bs-target='#modalForm' data-bs-toggle="modal" attr-href="{{url('/admin/edit',$data->id_admin)}}"><i class='bi bi-pencil-square'></i></btn>
+                                <btn class="btn btn-primary  ModalTrigger" data-title="Edit Akun Admin" data-bs-target='#modalForm' data-bs-toggle="modal" attr-href="{{url('/admin/modif-admin',$data->id_admin)}}"><i class='bi bi-pencil-square'></i></btn>
                                 <form action="{{url('/admin/admin/hapus',$data->id_admin)}}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data {{$data->username}} ?')"><i class='bi bi-trash'></i></button>

@@ -82,7 +82,7 @@
                         </li>
                         <div class="nav sidebar-menu sidebar-bottom flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                             @if(Auth::guard('admin')->user()->role === 'Super Admin')
-                            <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-person-fill-add"></i>
+                            <li class="nav-item"> <a href="#" class="nav-link ModalTrigger" data-title="Tambah Akun Admin" data-bs-target='#modalForm' data-bs-toggle="modal" attr-href="{{url('/admin/form-admin')}}"> <i class="nav-icon bi bi-person-fill-add"></i>
                                     <p class="text">Tambah Akun Admin</p>
                                 </a> </li>
                             @endif

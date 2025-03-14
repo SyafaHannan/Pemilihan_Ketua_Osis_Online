@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <form action="{{ route('tambah.admin') }}" method="post">
+        <form action="{{ route('admin.tambah') }}" method="post">
             @csrf
             <input type="hidden" name="id">
 
