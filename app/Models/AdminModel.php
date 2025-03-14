@@ -13,6 +13,7 @@ class AdminModel extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'username'
+        'username',
+        'role'
     ];
 }

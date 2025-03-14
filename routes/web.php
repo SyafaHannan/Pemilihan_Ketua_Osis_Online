@@ -33,6 +33,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
  */
 Route::prefix('/admin')->middleware(['LoginAdmin:Admin,Super Admin'])->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin'); //Dashboard
+    Route::get('/form',[AdminController::class,'formAdmin'])->name('form.admin');
+    Route::post('/admin/tambah',[AdminController::class,'tambahAdmin'])->middleware(['LoginAdmin:Super Admin'])->name('admin.tambah');
+    Route::post('/admin/edit/{id}',[AdminController::class,'editAdmin'])->middleware(['LoginAdmin:Super Admin'])->name('admin.edit');
+    Route::post('/admin/hapus/{id}',[AdminController::class,'hapus'])->middleware(['LoginAdmin:Super Admin'])->name('admin.hapus');
 
     /**
      * HALAMAN KANDIDAT

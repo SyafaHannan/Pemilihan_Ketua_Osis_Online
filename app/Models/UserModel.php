@@ -15,7 +15,6 @@ class UserModel extends Authenticatable
         'kelas',
         'no_induk',
         'tanggal_lahir',
-        'password',
         'status'
     ];
 }

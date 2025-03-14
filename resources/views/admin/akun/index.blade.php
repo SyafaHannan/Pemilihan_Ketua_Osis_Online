@@ -32,7 +32,7 @@
                     <h3 class="mb-0">Data Akun </h3>
                     <button id="toggleButton" class="btn btn-primary ms-2 bi bi-arrow-repeat"> Admin</button>
                     <btn class="btn btn-success  ModalTrigger ms-2" id="addButton" data-title="Tambah Akun User" data-bs-target='#modalForm' data-bs-toggle="modal" attr-href="{{url('/admin/form')}}"><i class='bi bi-plus-circle'></i> Tambah Akun</btn>
-
+                    <btn class="btn btn-success ModalTrigger ms-2 d-none" id="addButtonAdmin" data-title="Tambah Akun Admin" data-bs-target='#modalForm' data-bs-toggle="modal" attr-href="{{url('/admin/form')}}"><i class='bi bi-plus-circle'></i> Tambah Admin</btn>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
@@ -105,8 +105,11 @@
                             <td class="text-center">{{$data->role}}</td>
                             @if(Auth::guard('admin')->user()->role == 'Super Admin')
                             <td class="text-center">
-                                <a href="/nidhacenter/event/{{$data->id}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-
+                                <btn class="btn btn-primary  ModalTrigger" data-title="Edit Akun Admin" data-bs-target='#modalForm' data-bs-toggle="modal" attr-href="{{url('/admin/edit',$data->id_admin)}}"><i class='bi bi-pencil-square'></i></btn>
+                                <form action="{{url('/admin/admin/hapus',$data->id_admin)}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data {{$data->username}} ?')"><i class='bi bi-trash'></i></button>
+                                </form>
                             </td>
                             @endif
                         </tr>
