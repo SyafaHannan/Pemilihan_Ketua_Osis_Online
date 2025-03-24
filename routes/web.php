@@ -71,6 +71,11 @@ Route::prefix('/admin')->middleware(['LoginAdmin:Admin,Super Admin'])->group(fun
      * Halaman Forum Pemilihan
      */
     Route::get('/forum',[ForumController::class,'index'])->name('forum.pemilihan');
+    Route::get('/form-forum',[ForumController::class,'formForum'])->name('form.forum');
+    Route::get('/modif-forum/{id}',[ForumController::class,'modifForum'])->name('modif.forum');
+    Route::post('/forum/tambah',[ForumController::class,'tambahForum'])->name('forum.tambah');
+    Route::post('/forum/edit/{id}',[ForumController::class,'editForum'])->name('forum.edit');
+    Route::post('/forum/hapus/{id}',[ForumController::class,'hapusForum'])->name('forum.hapus');
 });
 
 Route::prefix('/user')->middleware(['LoginUser'])->group(function () {
