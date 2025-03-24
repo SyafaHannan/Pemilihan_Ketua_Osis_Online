@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\ForumController;
 use App\Http\Controllers\KandidatController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -33,9 +34,13 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
  */
 Route::prefix('/admin')->middleware(['LoginAdmin:Admin,Super Admin'])->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin'); //Dashboard
-    
-    Route::get('/form-admin',[AdminController::class,'formAdmin'])->name('form.admin');
-    Route::get('/modif-admin/{id}',[AdminController::class,'modifAdmin'])->name('form.admin');
+
+    /**
+     * CRUD Data Admin
+     * Fungsi CUD(Create,Update,Delete) pada data admin
+     */
+    Route::get('/form-admin',[AdminController::class,'formAdmin'])->middleware(['LoginAdmin:Super Admin'])->name('form.admin');
+    Route::get('/modif-admin/{id}',[AdminController::class,'modifAdmin'])->middleware(['LoginAdmin:Super Admin'])->name('form.admin');
     Route::post('/admin/tambah',[AdminController::class,'tambahAdmin'])->middleware(['LoginAdmin:Super Admin'])->name('admin.tambah');
     Route::post('/admin/edit/{id}',[AdminController::class,'editAdmin'])->middleware(['LoginAdmin:Super Admin'])->name('admin.edit');
     Route::post('/admin/hapus/{id}',[AdminController::class,'hapus'])->middleware(['LoginAdmin:Super Admin'])->name('admin.hapus');
@@ -62,6 +67,10 @@ Route::prefix('/admin')->middleware(['LoginAdmin:Admin,Super Admin'])->group(fun
     Route::post('/user/edit/{id}',[AkunController::class,'editUser'])->name('edit.user');
     Route::post('/user/hapus/{id}',[AkunController::class,'hapus'])->name('hapus.user');
 
+    /**
+     * Halaman Forum Pemilihan
+     */
+    Route::get('/forum',[ForumController::class,'index'])->name('forum.pemilihan');
 });
 
 Route::prefix('/user')->middleware(['LoginUser'])->group(function () {

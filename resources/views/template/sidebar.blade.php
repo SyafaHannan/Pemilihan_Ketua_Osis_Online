@@ -76,7 +76,7 @@
                         </li>
                         <li class="nav-item"> <a href="#" class="nav-link"> <i class="nav-icon bi bi-bar-chart-fill"></i>
                                 <p>
-                                    Data Pemilihan
+                                    Forum Pemilihan
                                 </p>
                             </a>
                         </li>

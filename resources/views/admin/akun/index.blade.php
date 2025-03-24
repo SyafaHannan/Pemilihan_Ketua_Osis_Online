@@ -1,5 +1,5 @@
 @extends('template.sidebar')
-@section('title','Admin | Dashboard')
+@section('title','Admin | Data Akun')
 @section('content')
 <main class="app-main">
     @if(session('success'))
@@ -50,7 +50,7 @@
     <div class="app-content">
         <div class="container-fluid">
             <div id="content1">
-                <table class="table AkunTable table-bordered table-hovered table-striped w-100">
+                <table class="table AkunTable table-bordered table-striped w-100">
                     <thead>
                         <tr>
                             <td class="text-center">No</td>
